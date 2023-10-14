@@ -21,7 +21,6 @@ func main() {
 		// check if clipboard contents are empty
 		if contents == nil {
 			// if so, skip this iteration
-			time.Sleep(1 * time.Second)
 			continue
 		}
 		// convert clipboard contents to strings
