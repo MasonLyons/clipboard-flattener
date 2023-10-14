@@ -16,6 +16,7 @@ func main() {
 	fmt.Println("Starting clipboard flattener")
 	// loop that runs forever
 	for {
+		time.Sleep(1 * time.Second)
 		// get clipboard contents
 		contents := clipboard.Read(clipboard.FmtText)
 		// check if clipboard contents are empty
@@ -25,19 +26,15 @@ func main() {
 		}
 		// convert clipboard contents to strings
 		content_string := string(contents)
-		// check if clipboard contents are empty
-		if content_string != "" {
-			// check if clipboard contents are already flattened
-			if strings.Contains(content_string, "\n") {
-				// if not, flatten them
-				content_string = strings.Replace(content_string, "\r", " ", -1)
-				content_string = strings.Replace(content_string, "\n", " ", -1)
-				content_string = strings.Replace(content_string, "  ", " ", -1)
-				// write flattened contents back to clipboard
-				clipboard.Write(clipboard.FmtText, []byte(content_string))
-				fmt.Println("Flattened clipboard contents")
-			}
+		// check if clipboard contents are already flattened
+		if strings.Contains(content_string, "\n") {
+			// if not, flatten them
+			content_string = strings.Replace(content_string, "\r", " ", -1)
+			content_string = strings.Replace(content_string, "\n", " ", -1)
+			content_string = strings.Replace(content_string, "  ", " ", -1)
+			// write flattened contents back to clipboard
+			clipboard.Write(clipboard.FmtText, []byte(content_string))
+			fmt.Println("Flattened clipboard contents")
 		}
-		time.Sleep(1 * time.Second)
 	}
 }
